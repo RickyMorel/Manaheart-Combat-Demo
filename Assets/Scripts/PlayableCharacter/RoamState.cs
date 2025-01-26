@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoamState : CharacterStateBase
@@ -13,7 +14,7 @@ public class RoamState : CharacterStateBase
         base.Start();
     }
 
-    public override void EnterState()
+    public override void EnterState(Dictionary<string, object> data = null)
     {
         _stateMachine.Agent.enabled = false;
     }

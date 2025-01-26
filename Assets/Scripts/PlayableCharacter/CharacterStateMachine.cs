@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CharacterStateMachine : MonoBehaviour
+public class CharacterStateMachine : MonoBehaviour, IAgent
 {
     #region Editor Fields
 
@@ -55,4 +55,11 @@ public class CharacterStateMachine : MonoBehaviour
 
     public void DoRoam() { DoState(_states[0]);  }
     public void DoFollow() { DoState(_states[1]);  }
+    public void DoEnterCombatState() { DoState(_states[2]); }
+    public void DoSlashAttack() { DoState(_states[3]); }
+
+    public void SetTurn()
+    {
+        
+    }
 }

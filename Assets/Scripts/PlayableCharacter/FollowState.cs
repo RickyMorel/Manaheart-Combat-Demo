@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowState : CharacterStateBase
@@ -13,7 +14,7 @@ public class FollowState : CharacterStateBase
         base.Start();
     }
 
-    public override void EnterState()
+    public override void EnterState(Dictionary<string, object> data = null)
     {
         _stateMachine.Agent.enabled = true;
         _stateMachine.Agent.updateRotation = false;

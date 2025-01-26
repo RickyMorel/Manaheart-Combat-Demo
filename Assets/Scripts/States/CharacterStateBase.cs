@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CharacterStateBase : MonoBehaviour
@@ -13,7 +14,7 @@ public abstract class CharacterStateBase : MonoBehaviour
         _stateMachine = GetComponent<CharacterStateMachine>();
     }
 
-    public virtual void EnterState()
+    public virtual void EnterState(Dictionary<string, object> data = null)
     {
 
     }

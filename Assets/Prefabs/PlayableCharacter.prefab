@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 4215912659583683142}
   - component: {fileID: 8130260094467540308}
   - component: {fileID: 7746279975043754836}
+  - component: {fileID: 1455497842652744925}
   m_Layer: 0
   m_Name: PlayableCharacter
   m_TagString: Untagged
@@ -186,6 +187,7 @@ MonoBehaviour:
   _states:
   - {fileID: 8130260094467540308}
   - {fileID: 7746279975043754836}
+  - {fileID: 1455497842652744925}
 --- !u!114 &8130260094467540308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +214,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
+--- !u!114 &1455497842652744925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7125907043334998613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965da66dd8811844da71b85179666831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+  _attackDistance: 2
