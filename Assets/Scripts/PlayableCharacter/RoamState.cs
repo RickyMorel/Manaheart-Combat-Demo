@@ -16,6 +16,8 @@ public class RoamState : CharacterStateBase
 
     public override void EnterState(Dictionary<string, object> data = null)
     {
+        Debug.Log("_stateMachine: " + _stateMachine);
+        Debug.Log("_stateMachine.Agent: " + _stateMachine.Agent);
         _stateMachine.Agent.enabled = false;
     }
 
@@ -46,8 +48,9 @@ public class RoamState : CharacterStateBase
         //TODO and add if not in combat
         if(_stateMachine.ControlId != CharacterManager.Instance.CurrentCharacter.ControlId) { _stateMachine.DoFollow(); }
     }
-    public override void ExitState()
+    public override void OnExitState()
     {
-
+        _stateMachine.Anim.SetFloat("MoveX", 0f);
+        _stateMachine.Anim.SetFloat("MoveY", 0f);
     }
 }

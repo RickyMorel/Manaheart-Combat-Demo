@@ -120,10 +120,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7832665193202722852}
   - component: {fileID: 3871795974376274028}
-  - component: {fileID: 4215912659583683142}
+  - component: {fileID: 6107955144818350081}
   - component: {fileID: 8130260094467540308}
   - component: {fileID: 7746279975043754836}
   - component: {fileID: 1455497842652744925}
+  - component: {fileID: 8137358736727216172}
   m_Layer: 0
   m_Name: PlayableCharacter
   m_TagString: Untagged
@@ -169,7 +170,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4215912659583683142
+--- !u!114 &6107955144818350081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7125907043334998613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 021d9ce5f7dcb534cb922006a19f9d48, type: 3}
+  m_Script: {fileID: 11500000, guid: b469fc569585cea4ca422d48ae37df8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 4354442615629283366}
@@ -187,6 +188,7 @@ MonoBehaviour:
   _states:
   - {fileID: 8130260094467540308}
   - {fileID: 7746279975043754836}
+  - {fileID: 8137358736727216172}
   - {fileID: 1455497842652744925}
 --- !u!114 &8130260094467540308
 MonoBehaviour:
@@ -228,3 +230,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _attackDistance: 2
+--- !u!114 &8137358736727216172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7125907043334998613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba71ed3d637f9e74ba1783e3c33794b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

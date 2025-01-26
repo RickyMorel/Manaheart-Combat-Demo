@@ -39,8 +39,9 @@ public class FollowState : CharacterStateBase
         //TODO and add if not in combat
         if(_stateMachine.ControlId == CharacterManager.Instance.CurrentCharacter.ControlId) { _stateMachine.DoRoam(); }
     }
-    public override void ExitState()
+    public override void OnExitState()
     {
-
+        _stateMachine.Anim.SetFloat("MoveX", 0f);
+        _stateMachine.Anim.SetFloat("MoveY", 0f);
     }
 }

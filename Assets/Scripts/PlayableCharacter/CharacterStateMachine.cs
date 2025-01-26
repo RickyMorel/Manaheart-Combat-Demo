@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CharacterStateMachine : MonoBehaviour, IAgent
+public class CharacterStateMachine : MonoBehaviour
 {
     #region Editor Fields
 
@@ -32,14 +32,14 @@ public class CharacterStateMachine : MonoBehaviour, IAgent
 
     #endregion
 
-    private void Start()
+    protected void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
 
         DoRoam();
     }
 
-    private void Update()
+    protected void Update()
     {
         if(_currentState == null) { return; }
 
@@ -48,6 +48,8 @@ public class CharacterStateMachine : MonoBehaviour, IAgent
 
     public void DoState(CharacterStateBase state)
     {
+        if(_currentState != null) {  _currentState.OnExitState(); }
+
         _currentState = state;
 
         _currentState.EnterState();

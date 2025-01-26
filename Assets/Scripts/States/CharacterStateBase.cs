@@ -9,9 +9,15 @@ public abstract class CharacterStateBase : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        Debug.Log("GET STATE MAC]HINE");
+        _stateMachine = GetComponent<CharacterStateMachine>();
+    }
+
     public virtual void Start()
     {
-        _stateMachine = GetComponent<CharacterStateMachine>();
+
     }
 
     public virtual void EnterState(Dictionary<string, object> data = null)
@@ -28,7 +34,7 @@ public abstract class CharacterStateBase : MonoBehaviour
     {
 
     }
-    public virtual void ExitState()
+    public virtual void OnExitState()
     {
 
     }

@@ -5,8 +5,6 @@ public class CombatState : CharacterStateBase
 {
     #region Editor Fields
 
-    [SerializeField] private float _moveSpeed;
-
     #endregion
 
     public override void Start()
@@ -17,6 +15,7 @@ public class CombatState : CharacterStateBase
     public override void EnterState(Dictionary<string, object> data = null)
     {
         _stateMachine.Agent.enabled = false;
+        _stateMachine.Anim.SetBool("IsInCombat", true);
     }
 
     public override void OnUpdate()
@@ -31,8 +30,9 @@ public class CombatState : CharacterStateBase
             _stateMachine.DoSlashAttack();  
         }
     }
-    public override void ExitState()
-    {
 
+    public override void OnExitState()
+    {
+        _stateMachine.Anim.SetBool("IsInCombat", false);
     }
 }
