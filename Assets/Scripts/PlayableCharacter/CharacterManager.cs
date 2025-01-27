@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
@@ -14,6 +15,9 @@ public class CharacterManager : MonoBehaviour
 
     public static CharacterManager Instance { get; private set; }
     public PlayableCharacter CurrentCharacter => _currentCharacter;
+    public PlayableCharacter[] AllCharacters => _allCharacters;
+
+    public event Action<PlayableCharacter> OnSwitchCharacter;
 
     #endregion
 
@@ -46,6 +50,8 @@ public class CharacterManager : MonoBehaviour
 
         if(_currentCharacterIndex >= _allCharacters.Length) { _currentCharacterIndex = 0; }
 
-        _currentCharacter = _allCharacters[_currentCharacterIndex]; 
+        _currentCharacter = _allCharacters[_currentCharacterIndex];
+
+        OnSwitchCharacter?.Invoke(_currentCharacter);
     }
 }

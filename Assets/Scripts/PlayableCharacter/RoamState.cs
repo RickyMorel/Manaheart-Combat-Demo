@@ -16,8 +16,6 @@ public class RoamState : CharacterStateBase
 
     public override void EnterState(Dictionary<string, object> data = null)
     {
-        Debug.Log("_stateMachine: " + _stateMachine);
-        Debug.Log("_stateMachine.Agent: " + _stateMachine.Agent);
         _stateMachine.Agent.enabled = false;
     }
 

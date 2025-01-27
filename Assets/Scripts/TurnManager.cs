@@ -11,13 +11,24 @@ public class TurnManager : MonoBehaviour
 
     #endregion
 
-    private void Update()
+    #region Public Properties
+
+    public static TurnManager Instance;
+
+    #endregion
+
+    private void Awake()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if (Instance != null && Instance != this)
         {
-            StartCombat();
+            Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+
 
     public void StartCombat()
     {
