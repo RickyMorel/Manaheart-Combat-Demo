@@ -6,7 +6,6 @@ public class SlashAttackState : CharacterStateBase
 {
     #region Editor Fields
 
-    [SerializeField] private Transform _target;
     [SerializeField] private float _attackDistance;
 
     #endregion
@@ -32,14 +31,20 @@ public class SlashAttackState : CharacterStateBase
         _initialAttackPos = transform.position; 
 
         _stateMachine.Agent.enabled = true;
+        _stateMachine.Agent.stoppingDistance = _attackDistance;
 
-        _stateMachine.Agent.SetDestination(_target.position);
+        _stateMachine.Agent.SetDestination(TargetSelector.Instance.CurrentTarget.transform.position);
 
         _stateMachine.Anim.SetFloat("MoveY", 1f);
 
-        bool isInAttackingDistance = Vector3.Distance(_target.position, transform.position) <= _attackDistance;
+        bool isInAttackingDistance = false;
 
-        yield return new WaitUntil(() => isInAttackingDistance);
+        while(!isInAttackingDistance) {
+            isInAttackingDistance = Vector3.Distance(TargetSelector.Instance.CurrentTarget.transform.position, transform.position) <= _attackDistance;
+            yield return null;
+        }
+
+        //Debug.Log("isInAttackingDistance: " + isInAttackingDistance);
 
         _stateMachine.Agent.enabled = false;
 
@@ -49,14 +54,19 @@ public class SlashAttackState : CharacterStateBase
     private IEnumerator RunBack()
     {
         _stateMachine.Agent.enabled = true;
+        _stateMachine.Agent.stoppingDistance = 0f;
 
         _stateMachine.Agent.SetDestination(_initialAttackPos);
 
         _stateMachine.Anim.SetFloat("MoveY", 1f);
 
-        bool IsBackInPlace = Vector3.Distance(_initialAttackPos, transform.position) == 0;
+        bool IsBackInPlace = false;
 
-        yield return new WaitUntil(() => IsBackInPlace);
+        while (!IsBackInPlace)
+        {
+            IsBackInPlace = Vector3.Distance(_initialAttackPos, transform.position) < 0.5;
+            yield return null;
+        }
 
         _stateMachine.Agent.enabled = false;
 
@@ -65,7 +75,7 @@ public class SlashAttackState : CharacterStateBase
 
     private IEnumerator AttackTarget()
     {
-        RunToTarget();
+        yield return RunToTarget();
 
         _stateMachine.Anim.Play("SlashAttack", 0);
 
@@ -75,7 +85,7 @@ public class SlashAttackState : CharacterStateBase
 
         yield return new WaitForSeconds(attackAnimLength);
 
-        RunBack();
+        yield return RunBack();
 
         _stateMachine.DoEnterCombatState();
     }

@@ -36,6 +36,8 @@ public class CharacterStateMachine : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
 
+        _agent.updateRotation = false;
+
         DoRoam();
     }
 

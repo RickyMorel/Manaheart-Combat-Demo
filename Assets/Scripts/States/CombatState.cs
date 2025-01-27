@@ -25,6 +25,8 @@ public class CombatState : CharacterStateBase
 
     public override void CheckExitState()
     {
+        if(_stateMachine != CharacterManager.Instance.CurrentCharacter) { return; }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             _stateMachine.DoSlashAttack();  

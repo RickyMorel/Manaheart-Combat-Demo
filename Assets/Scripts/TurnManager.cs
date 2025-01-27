@@ -29,10 +29,21 @@ public class TurnManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-    public void StartCombat()
+    private void Start()
     {
-        _allAgents = FindObjectsOfType<CharacterStateMachine>().ToList();
+        CombatLocation.OnEnterCombat += OnStartCombat;
+    }
+
+    private void OnDestroy()
+    {
+        CombatLocation.OnEnterCombat -= OnStartCombat;
+    }
+
+    public void OnStartCombat(AiStateMachine[] enemies)
+    {
+        _allAgents = new List<CharacterStateMachine>();
+        _allAgents.AddRange(CharacterManager.Instance.AllCharacters);
+        _allAgents.AddRange(enemies);
 
         foreach (CharacterStateMachine agent in _allAgents)
         {

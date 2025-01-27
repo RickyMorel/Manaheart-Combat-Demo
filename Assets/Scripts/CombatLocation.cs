@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,13 @@ public class CombatLocation : MonoBehaviour
 
     [SerializeField] private Transform[] _playerLocations;
     [SerializeField] private Transform[] _enemyLocations;
-    [SerializeField] private CharacterStateMachine[] _enemies;
+    [SerializeField] private AiStateMachine[] _enemies;
+
+    #endregion
+
+    #region Public Properties
+
+    public static event Action<AiStateMachine[]> OnEnterCombat;
 
     #endregion
 
@@ -40,7 +47,7 @@ public class CombatLocation : MonoBehaviour
 
         SnapToFinalPositions(enemyMovements, playerMovements);
 
-        TurnManager.Instance.StartCombat();
+        OnEnterCombat?.Invoke(_enemies);
     }
 
     private IEnumerator LerpToPositions(List<MovementData> enemyMovements, List<MovementData> playerMovements)
@@ -97,25 +104,6 @@ public class CombatLocation : MonoBehaviour
         foreach (MovementData movement in playerMovements)
         {
             movement.Transform.position = movement.TargetPosition;
-        }
-    }
-
-    private void SnapCharactersIntoPosition()
-    {
-        int i = 0;
-        foreach (Transform location in _enemyLocations)
-        {
-            _enemies[i].transform.position = location.position;
-
-            i++;
-        }
-
-        i = 0;
-        foreach (Transform location in _enemyLocations)
-        {
-            CharacterManager.Instance.AllCharacters[i].transform.position = location.position;
-
-            i++;
         }
     }
 
